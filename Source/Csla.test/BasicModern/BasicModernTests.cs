@@ -8,10 +8,10 @@ namespace Csla.Test.BasicModern
   [TestClass]
   public class BasicModernTests
   {
-    private static TestDIContext _testDIContext;
+    private TestDIContext _testDIContext;
 
-    [ClassInitialize]
-    public static void ClassInitialize(TestContext context)
+    [TestInitialize]
+    public void ClassInitialize()
     {
       var services = new ServiceCollection();
       services.AddCsla(o => o.Binding(bo => bo.PropertyChangedMode = ApplicationContext.PropertyChangedModes.Xaml));
@@ -71,8 +71,8 @@ namespace Csla.Test.BasicModern
         Assert.AreEqual(original.Id, copy.Id);
         Assert.AreEqual(original.IsDirty, copy.IsDirty);
         Assert.AreEqual(original.IsSelfDirty, copy.IsSelfDirty);
-        
-        for(var i = 0; i < original.Children.Count; i++)
+
+        for (var i = 0; i < original.Children.Count; i++)
         {
           Assert.IsFalse(ReferenceEquals(original.Children[i], copy.Children[i]));
           Assert.AreEqual(original.Children[i].Name, copy.Children[i].Name);
@@ -95,7 +95,6 @@ namespace Csla.Test.BasicModern
     }
 
     [TestMethod]
-    [TestCategory("SkipOnCIServer")]
     public void MakeOldMetastateEvents()
     {
       var graph = NewRoot();
@@ -118,7 +117,6 @@ namespace Csla.Test.BasicModern
     }
 
     [TestMethod]
-    [TestCategory("SkipOnCIServer")]
     public void MarkDeletedMetastateEvents()
     {
       var graph = NewRoot();
@@ -142,7 +140,6 @@ namespace Csla.Test.BasicModern
     }
 
     [TestMethod]
-    [TestCategory("SkipOnCIServer")]
     public void RootChangedMetastateEventsId()
     {
       var graph = NewRoot();
@@ -165,7 +162,6 @@ namespace Csla.Test.BasicModern
     }
 
     [TestMethod]
-    [TestCategory("SkipOnCIServer")]
     public void RootChangedMetastateEventsName()
     {
       var graph = NewRoot();
@@ -210,7 +206,6 @@ namespace Csla.Test.BasicModern
     }
 
     [TestMethod]
-    [TestCategory("SkipOnCIServer")]
     public void RootChangedMetastateEventsChild()
     {
 
